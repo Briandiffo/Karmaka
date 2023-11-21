@@ -67,6 +67,7 @@ public class Partie {
 		Carte carte6=new Carte(EnumCouleur.Bleu, 0, "chatparp", p);
 		Carte carte7=new Carte(EnumCouleur.Bleu, 2, "chat",p);
 		carte1.getPouvoir().destine();
+		System.out.println("une modification");
 		
 		/*Joueur player1=new Joueur("brian");
 		Joueur player2=new Joueur("charlet");
