@@ -4,12 +4,12 @@ public class Carte {
 	private EnumCouleur couleur;
 	private int nbPoint;
 	private String description;
-	private PouvoirCarte pouvoir;
-	public Carte(EnumCouleur couleur, int nbPoint, String description, PouvoirCarte pouvoir) {
+	
+	public Carte(EnumCouleur couleur, int nbPoint, String description) {
 		this.couleur=couleur;
 		this.nbPoint=nbPoint;
 		this.description=description;
-		this.pouvoir=pouvoir;	}
+			}
 	
 	public EnumCouleur getCouleur() {
 		return this.couleur;
@@ -23,10 +23,11 @@ public class Carte {
 		return this.description;
 	}
 	public String toString() {
-		return "description: "+this.description+", pouvoir: "+this.pouvoir+", nbPoint: "+this.nbPoint;
+		return "description: "+this.description+", pouvoir: "+", nbPoint: "+this.nbPoint;
 	}
-	public PouvoirCarte getPouvoir() {
-		return this.pouvoir;
+	public void usePouvoir(Joueur user, Joueur victim) {
+		System.out.println("i am using it");
+		
 	}
 	
 	

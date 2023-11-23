@@ -32,6 +32,12 @@ public class Partie {
 		
 	}
 	
+	public  void ajouterCarte(List<Carte> carte) {
+		this.source.addAll(carte);
+		
+	}
+	
+	
 	public void distribuerCarte() {
 		int compteur =0;
 		Collections.shuffle(source);
@@ -58,28 +64,33 @@ public class Partie {
 		
 	}
 	public static void main(String[] args) {
-		PouvoirCarte p=new PouvoirCarte();
-		Carte carte1=new Carte(EnumCouleur.Bleu, 2, "chat", p);
-		Carte carte2=new Carte(EnumCouleur.Vert, 3, "chaton", p);
-		Carte carte3=new Carte(EnumCouleur.Rouge, 7, "charle", p);
-		Carte carte4=new Carte(EnumCouleur.Bleu, 1, "chien", p);
-		Carte carte5=new Carte(EnumCouleur.Mosaique, 9, "chatie", p);
-		Carte carte6=new Carte(EnumCouleur.Bleu, 0, "chatparp", p);
-		Carte carte7=new Carte(EnumCouleur.Mosaique, 2, "chat",p);
-		
+		CardFactory factory=CardFactory.getInstance();
+		/*Carte carte1=new Carte(EnumCouleur.Bleu, 2, "chat");
+		Carte carte2=new Carte(EnumCouleur.Vert, 3, "chaton");
+		Carte carte3=new Carte(EnumCouleur.Rouge, 7, "charle");
+		Carte carte4=new Carte(EnumCouleur.Bleu, 1, "chien");
+		Carte carte5=new Carte(EnumCouleur.Mosaique, 9, "chatie");
+		Carte carte6=new Carte(EnumCouleur.Bleu, 0, "chatparp");
+		Carte carte7=new Carte(EnumCouleur.Mosaique, 2, "chat");
+		*/
 		System.out.println("une modification");
 		
 		Joueur player1=new Joueur("brian");
 		Joueur player2=new Joueur("charlet");
 		
 		Partie partie=Partie.getInstancePartie(player1, player2);
-		partie.ajouterCarte(carte1);
+		
+		/*partie.ajouterCarte(carte1);
 		partie.ajouterCarte(carte2);
 		partie.ajouterCarte(carte3);
 		partie.ajouterCarte(carte4);
 		partie.ajouterCarte(carte5);
 		partie.ajouterCarte(carte6);
-		partie.ajouterCarte(carte7);
+		partie.ajouterCarte(carte7);*/
+		partie.ajouterCarte(factory.createDestinee());
+		partie.ajouterCarte(factory.createDestinee());
+		partie.ajouterCarte(factory.createDestinee());
+		
 		
 		partie.distribuerCarte();
 		
@@ -93,6 +104,7 @@ public class Partie {
 		
 		//test de la methode de calcul du nombre de points 
 		int a=player1.calculMaxPointOeuvre();
+		player2.getMain().get(1).usePouvoir(player2, player1);
 		System.out.println("pour le joueur 1 , le nombre max de point est "+a);
 		
 		
