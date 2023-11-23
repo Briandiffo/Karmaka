@@ -7,7 +7,7 @@ public class JoueurVirtuel extends Joueur implements Strategie{
 		super(nomJoueur);
 		
 	}
-	public Carte play(List<Carte> donneur, List<Carte> receveur, int indice) {
+	public Carte play() {
 		return null;
 	}
 	
