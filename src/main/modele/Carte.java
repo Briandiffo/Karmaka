@@ -23,12 +23,14 @@ public class Carte {
 		return this.description;
 	}
 	public String toString() {
-		return "description: "+this.description+", pouvoir: "+", nbPoint: "+this.nbPoint;
+		//return "description: "+this.description+", pouvoir: "+", nbPoint: "+this.nbPoint;
+		return"[**"+this.description+"\n"+this.couleur+"\n"+"points: "+this.nbPoint+"**]\n";
 	}
 	public void usePouvoir(Joueur user, Joueur victim) {
 		System.out.println("i am using it");
 		
 	}
+	
 	
 	
 	

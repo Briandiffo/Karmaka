@@ -6,12 +6,18 @@ public class Partie {
 	private Joueur player;
 	private Joueur computerPlayer;
 	private LinkedList<Carte> source;
+	private ArrayList<Carte> fausse;
 	
 	private Partie(Joueur player1, Joueur player2) {
 		this.player=player1;
 		this.computerPlayer=player2;
 		this.source= new LinkedList<Carte>();
+		this.fausse= new ArrayList<Carte>();
 		
+	}
+	
+	public Joueur getComputer() {
+		return this.computerPlayer;
 	}
 	
 	public static Partie getInstancePartie(Joueur player1, Joueur player2) {
@@ -65,46 +71,29 @@ public class Partie {
 	}
 	public static void main(String[] args) {
 		CardFactory factory=CardFactory.getInstance();
-		/*Carte carte1=new Carte(EnumCouleur.Bleu, 2, "chat");
-		Carte carte2=new Carte(EnumCouleur.Vert, 3, "chaton");
-		Carte carte3=new Carte(EnumCouleur.Rouge, 7, "charle");
-		Carte carte4=new Carte(EnumCouleur.Bleu, 1, "chien");
-		Carte carte5=new Carte(EnumCouleur.Mosaique, 9, "chatie");
-		Carte carte6=new Carte(EnumCouleur.Bleu, 0, "chatparp");
-		Carte carte7=new Carte(EnumCouleur.Mosaique, 2, "chat");
-		*/
+		
 		System.out.println("une modification");
 		
-		Joueur player1=new Joueur("brian");
+		JoueurPhysique player1=new JoueurPhysique("brian");
 		Joueur player2=new Joueur("charlet");
 		
 		Partie partie=Partie.getInstancePartie(player1, player2);
 		
-		/*partie.ajouterCarte(carte1);
-		partie.ajouterCarte(carte2);
-		partie.ajouterCarte(carte3);
-		partie.ajouterCarte(carte4);
-		partie.ajouterCarte(carte5);
-		partie.ajouterCarte(carte6);
-		partie.ajouterCarte(carte7);*/
-		partie.ajouterCarte(factory.createDestinee());
-		partie.ajouterCarte(factory.createDestinee());
-		partie.ajouterCarte(factory.createDestinee());
+		
+		factory.remplissageCarte(partie.source);
 		
 		
 		partie.distribuerCarte();
 		
 		//affichage de la main d'un joueur apreès distribution de carte
-		System.out.println(player1.getMain());
+		//System.out.println(player1);
 		
 		//test de la methode de jouerOeuvre
-		player1.jouerOeuvre(player1.getMain().get(0));
-		player1.jouerOeuvre(player1.getMain().get(0));
-		System.out.println(player1.getMain());
+		player1.play();
 		
 		//test de la methode de calcul du nombre de points 
 		int a=player1.calculMaxPointOeuvre();
-		player2.getMain().get(1).usePouvoir(player2, player1);
+		
 		System.out.println("pour le joueur 1 , le nombre max de point est "+a);
 		
 		

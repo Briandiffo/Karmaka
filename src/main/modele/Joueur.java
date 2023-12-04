@@ -4,16 +4,19 @@ import java.util.*;
 public class Joueur {
 	final private String nomJoueur;
 	private ArrayList<Carte> main;
-	private ArrayList<Carte> pile;
+	private LinkedList<Carte> pile;
 	private ArrayList<Carte> oeuvre;
 	private ArrayList<Carte> vieFuture;
-	private EnumEtat etatJoueur;
+	private EnumEtat etat;
+	private EnumEtat etatJoueur=etat.Bousier;
+	private EnumEtat etatSuivant=etat.loup;
+
 	
 	public Joueur(String nomJoueur) {
 		this.nomJoueur=nomJoueur;
 		this.etatJoueur=EnumEtat.Bousier;
 		this.main= new ArrayList<Carte>();
-		this.pile=new ArrayList<Carte>();
+		this.pile=new LinkedList<Carte>();
 		this.oeuvre=new ArrayList<Carte>();
 	}
 	
@@ -77,6 +80,10 @@ public class Joueur {
 		this.vieFuture.add(carte);
 	}
 	
+	public Carte piocherPile() {
+		return this.pile.poll();
+	}
+	
 	//implementer les différents coups possibles 
 	public Carte jouerVieFuture(Carte carteJoue) {
 		this.main.remove(carteJoue);
@@ -90,8 +97,9 @@ public class Joueur {
 		return carteJoue;
 	}
 	
-	public Carte jouerPouvoir(Carte carteJoue) {
+	public Carte jouerPouvoir(Carte carteJoue, Joueur victim) {
 		this.main.remove(carteJoue);
+		carteJoue.usePouvoir(this, victim);
 		return carteJoue;
 	}
 	
@@ -146,6 +154,65 @@ public class Joueur {
 		return max;
 		
 	}
+	
+	public String toString() {
+		StringBuilder result=new StringBuilder();
+		result.append("\n-----------affichage de la main-----------\n");
+		result.append(afficherMain().toString());
+		
+		result.append("\n-----------affichage de la pile-----------\n");
+		result.append(pile.toString());
+		
+		
+		result.append("\n-----------affichage de l'oeuvre-----------\n");
+		result.append(oeuvre.toString());
+		return result.toString();
+	}
+	
+	
+	/*vérification de la main*/
+	public boolean checkMain() {
+		if(this.main.isEmpty()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	/*vérification de la main*/
+	public boolean checkPile() {
+		if(this.pile.isEmpty()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public void reincarnation() {
+		this.etatJoueur=this.etatSuivant;
+		this.etatSuivant=etat.getNextState(etatSuivant); 
+	}
+	
+	public StringBuilder afficherMain() {
+		
+		//afficher le numero et le nom de la carte
+		StringBuilder result=new StringBuilder();
+		
+		Iterator<Carte> iterator=this.main.iterator();
+		
+		int indice=0;
+		
+		while(iterator.hasNext()) {
+			indice++;
+			result.append(indice+iterator.next().getDescription()+"\n");
+			
+		}
+		return result;
+	}
+	
+	
 	
 	
 }
